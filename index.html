@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUNegro</title>
+    <script src="https://kit.fontawesome.com/b8e465c7ae.js" crossorigin="anonymous"></script>
+    <!-- me gusta tener los style cerca -->
+    <style>
+        /* header jo */
+        #navegador {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: #38444d;
+            border-radius: 20px;
+
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            /*para q el efecto verder no se salga del div */
+        }
+
+        li {
+            float: left;
+        }
+
+        .boton-menu {
+            background-color: transparent;
+            border: 0;
+            color: var(--clr-white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+            padding: 1rem;
+            font-size: .85rem;
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        li button,
+        #dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            border-radius: 20px;
+
+        }
+
+        /* activa color al pasar el puntero */
+        li a:hover,
+        .dropdown:hover #dropbtn {
+            background-color: rgba(31, 180, 43, 0.87);
+        }
+
+        li .boboton:hover,
+        .boton-menu:hover {
+            background-color: rgba(31, 180, 43, 0.87);
+        }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            /* min-width: 160px; */
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 16px;
+            /* left: 450px; */
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            border-radius: 16px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* fin */
+        body {
+            background-color: #2b303a;
+            margin: 0%;
+            font-family: "Courier New", Courier, monospace;
+            display: block;
+        }
+
+        .contenedor-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            animation: aparecerDesdeElFondo 0.3s ease-out;
+
+            /* position: fixed; */
+            padding: 15px;
+            /* top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1; */
+
+        }
+
+        .header-contenedor-texto {
+            text-align: center;
+        }
+
+        .header-parrafo {
+            font-size: 17px;
+            color: #c2cac0;
+        }
+
+        .header-h1 {
+            font-size: 22px;
+            color: #f3fcf0;
+        }
+
+        .contimg_avatar {
+            width: 65px;
+        }
+
+        .img_avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50rem;
+        }
+
+        main {
+            padding: 16px;
+        }
+
+        .contenedor-de-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            color: #f3fcf0;
+        }
+
+        .contenedor2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+        }
+
+        .header-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 7px 9px;
+            border-color: transparent;
+            border-radius: 16px;
+            font: size 15px;
+            text-align: center;
+
+        }
+
+
+        @keyframes aparecerDesdeElFondo {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes aparecerYDesaparecerDesdeElFondo {
+            0% {
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .contenedor-de-noti {
+            /* position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 10px;
+            z-index: 2;
+
+            display: none;
+            align-items: center;
+            justify-content: center; */
+
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: aparecerDesdeElFondo 0.3s ease-out;
+            padding: 16px;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        .parrafonoti {
+            min-width: 200px;
+            padding: 7px 9px;
+            /* background-color: #f3fcf0; lo creo desde js */
+            border-radius: 16px;
+            text-align: center;
+            animation: aparecerYDesaparecerDesdeElFondo 2s linear;
+        }
+
+        @media screen and (max-width: 322px) {
+            #menuUL {
+                display: flex;
+                flex-direction: row-reverse;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- lo normal es que el main este afuera del header -->
+    <header class="contenedor-header">
+        <div class="header-contenedor-texto">
+            <div id="navegador">
+                <ul id="menuUL" class="menu">
+                    <li>
+                        <button id="btnexperiencia" class="boton-menu boton-categoria active">
+                            Experiencia</button>
+                    </li>
+                    <li>
+                        <button id="btneducación" class="boton-menu boton-categoria"> Educación</button>
+                    </li>
+                    <li>
+                        <button id="btndatos" class="boton-menu boton-categoria"> Datos</button>
+                    </li>
+
+                    <li style="float:right" class="dropdown">
+                        <a href="javascript:void(0)" id="dropbtn">C</a>
+                        <div class="dropdown-content">
+                            <a href="#" class="fa-brands fa-facebook"></a>
+                            <a href="#" class="fa-brands fa-instagram"></a>
+                            <a id="mensajeW" href="#" class="fa-brands fa-whatsapp"></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <main>
+                <div id="Experiencia" class="contenedor-de-noti ">
+                    <p class="header-parrafo">Bienvenido, Me llamo José y espero que estes teniendo un lindo día</p>
+                    <h1 class="header-h1">Te cuento que trabaje en</h1>
+                    <p class="header-parrafo">Te Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro cumque
+                        dignissimos ex odio architecto veniam iure hic officiis eum, quae, similique placeat quia
+                        numquam vero ratione corporis sint nisi sunt.</p>
+                    <h1 class="header-h1">Luego decidí tomar otro rubo en</h1>
+                    <p class="header-parrafo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
+                        voluptatibus consectetur deleniti. At ducimus nihil est ad quo perspiciatis, non officiis sint
+                        illo doloribus iste, assumenda ut, libero quod. Tenetur?</p>
+                    <h1 class="header-h1">hasta que econtre</h1>
+                    <p class="header-parrafo">el mundo
+                        <a href="https://www.ecma-international.org/"><code style="color: #efd81d;
+                            ">{Js}</code></a>
+                        del desarrollo Web :)
+                    </p>
+                    <p id="parrafo-noti" class="parrafonoti"></p>
+                </div>
+
+                <div id="educación" class="contenedor-de-noti">
+
+                    <h1 class="header-h1">Nivel secundario </h1>
+                    <p class="header-parrafo">Completo. Escuela 111</p>
+                    <h1 class="header-h1">Programación Web</h1>
+                    <p class="header-parrafo">Actualmente me encuentro estudiando por mi cuenta HTML, CSS, JS y PHP</p>
+                    <h1 class="header-h1">Universidad</h1>
+                    <p class="header-parrafo">Al día de hoy estoy estudiando la carrera de Abogacía</p>
+
+                </div>
+
+                <div id="datos" class="contenedor-de-noti">
+
+
+                </div>
+
+            </main>
+        </div>
+    </header>
+
+    <script src="./js/IUnegro.js"></script>
+
+</body>
+
+</html>
